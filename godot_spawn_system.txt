@@ -1,0 +1,81 @@
+# res://scripts/systems/spawn_point.gd
+class_name SpawnPoint
+extends Node2D
+
+@export var spawn_interval: float = 3.0
+@export var enemy_scene: PackedScene
+
+var home_castle: EntityNode = null
+var spawn_timer: float = 0.0
+var is_active: bool = true
+
+func _ready():
+	if not enemy_scene:
+		enemy_scene = preload("res://scenes/enemy_character.tscn")
+
+func _process(delta):
+	if not is_active or not home_castle:
+		return
+	
+	spawn_timer += delta
+	if spawn_timer >= spawn_interval:
+		spawn_enemy()
+		spawn_timer = 0.0
+
+func spawn_enemy():
+	if not enemy_scene:
+		return
+	
+	var enemy = enemy_scene.instantiate()
+	get_parent().add_child(enemy)
+	enemy.global_position = global_position
+	
+	if enemy is EnemyCharacter and home_castle:
+		enemy.set_target(home_castle)
+
+func set_home_castle(castle: EntityNode):
+	home_castle = castle
+
+# res://scripts/entities/home_castle.gd
+class_name HomeCastle
+extends EntityNode
+
+func _ready():
+	super._ready()
+	
+	# Create castle entity data
+	var castle_stats = Stats.new(500.0, 0.0, 0.0)
+	var castle_blueprint = Blueprint.new("Home Castle", GameEnums.EntityType.TOWER)
+	entity_data = Entity.new("Home Castle", castle_stats, castle_blueprint)
+	
+	entity_data.health_changed.connect(_on_health_changed)
+	entity_data.died.connect(_on_died)
+	_update_health_bar()
+
+func _on_died():
+	# Castle destroyed - game over
+	get_tree().call_deferred("reload_current_scene")
+
+# res://scripts/game_manager.gd
+class_name GameManager
+extends Node
+
+@onready var player: PlayerCharacter = $Player
+@onready var home_castle: HomeCastle = $HomeCastle
+@onready var spawn_points: Array[Node] = []
+
+func _ready():
+	# Find all spawn points
+	for child in get_children():
+		if child is SpawnPoint:
+			spawn_points.append(child)
+			child.set_home_castle(home_castle)
+
+func _input(event):
+	# Handle touch/click movement
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			player.set_move_target(event.position)
+	elif event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			player.set_move_target(get_viewport().get_mouse_position())

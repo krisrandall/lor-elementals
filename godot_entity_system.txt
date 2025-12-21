@@ -1,0 +1,255 @@
+# res://scripts/entities/entity.gd
+class_name Entity
+extends RefCounted
+
+signal died
+signal health_changed(current: float, max: float)
+
+var entity_name: String = "Entity"
+var stats: Stats
+var blueprint: Blueprint
+var inventory: Inventory
+
+func _init(name: String, initial_stats: Stats, bp: Blueprint = null):
+	entity_name = name
+	stats = initial_stats
+	blueprint = bp
+	inventory = Inventory.new()
+
+func take_damage(amount: float):
+	var is_dead = stats.take_damage(amount)
+	health_changed.emit(stats.current_hp, stats.max_hp)
+	if is_dead:
+		died.emit()
+
+func equip_item(item: Item, slot: BlueprintSlot) -> bool:
+	if blueprint and slot in blueprint.slots:
+		if slot.equip(item):
+			inventory.remove_item(item)
+			return true
+	return false
+
+func unequip_item(slot: BlueprintSlot) -> Item:
+	if blueprint and slot in blueprint.slots:
+		var item = slot.unequip()
+		if item:
+			inventory.add_item(item)
+		return item
+	return null
+
+func get_equipped_weapons() -> Array[Weapon]:
+	var weapons: Array[Weapon] = []
+	if blueprint:
+		for slot in blueprint.slots:
+			if slot.is_filled() and slot.equipped_item is Weapon:
+				weapons.append(slot.equipped_item)
+	return weapons
+
+func get_total_defense() -> float:
+	var total = 0.0
+	if blueprint:
+		for slot in blueprint.slots:
+			if slot.is_filled() and slot.equipped_item is Armor:
+				total += slot.equipped_item.defense
+	return total
+
+func get_speed_with_modifiers() -> float:
+	var base_speed = stats.speed
+	var modifier = 0.0
+	if blueprint:
+		for slot in blueprint.slots:
+			if slot.is_filled():
+				if slot.equipped_item is Weapon:
+					modifier += slot.equipped_item.speed_modifier
+				elif slot.equipped_item is Armor:
+					modifier += slot.equipped_item.speed_modifier
+	return base_speed + modifier
+
+# res://scripts/entities/entity_node.gd
+class_name EntityNode
+extends CharacterBody2D
+
+@export var entity_data: Entity
+@onready var sprite: ColorRect = $Sprite
+@onready var health_bar: ProgressBar = $HealthBar
+
+var last_attack_time: float = 0.0
+
+func _ready():
+	if entity_data:
+		entity_data.health_changed.connect(_on_health_changed)
+		entity_data.died.connect(_on_died)
+		_update_health_bar()
+
+func _on_health_changed(current: float, max_hp: float):
+	_update_health_bar()
+
+func _update_health_bar():
+	if health_bar and entity_data:
+		health_bar.value = entity_data.stats.get_hp_percent() * 100
+
+func _on_died():
+	queue_free()
+
+func can_attack() -> bool:
+	if entity_data:
+		var weapons = entity_data.get_equipped_weapons()
+		if weapons.size() > 0:
+			var weapon = weapons[0]
+			var time_since_last = Time.get_ticks_msec() / 1000.0 - last_attack_time
+			return time_since_last >= (1.0 / weapon.attack_speed)
+	return false
+
+func attack(target: EntityNode) -> bool:
+	if not can_attack():
+		return false
+		
+	if entity_data:
+		var weapons = entity_data.get_equipped_weapons()
+		if weapons.size() > 0:
+			var weapon = weapons[0]
+			var distance = global_position.distance_to(target.global_position)
+			
+			if distance <= weapon.attack_range:
+				target.entity_data.take_damage(weapon.damage)
+				last_attack_time = Time.get_ticks_msec() / 1000.0
+				return true
+	return false
+
+# res://scripts/entities/player_character.gd
+class_name PlayerCharacter
+extends EntityNode
+
+var move_target: Vector2 = Vector2.ZERO
+var has_move_target: bool = false
+var nearby_enemies: Array[EntityNode] = []
+
+func _ready():
+	super._ready()
+	
+	# Create player entity data
+	var player_stats = Stats.new(100.0, 10.0, 150.0)
+	var player_blueprint = Blueprint.create_basic_character()
+	entity_data = Entity.new("Player", player_stats, player_blueprint)
+	
+	# Equip basic sword
+	var sword = Weapon.create_basic_sword()
+	entity_data.inventory.add_item(sword)
+	var weapon_slots = player_blueprint.get_slots_of_type(GameEnums.ItemType.WEAPON_HANDHELD)
+	if weapon_slots.size() > 0:
+		entity_data.equip_item(sword, weapon_slots[0])
+	
+	entity_data.health_changed.connect(_on_health_changed)
+	entity_data.died.connect(_on_died)
+	_update_health_bar()
+
+func _physics_process(delta):
+	# Handle movement
+	if has_move_target:
+		var direction = (move_target - global_position).normalized()
+		var distance = global_position.distance_to(move_target)
+		
+		if distance > 5.0:
+			velocity = direction * entity_data.get_speed_with_modifiers()
+			move_and_slide()
+		else:
+			has_move_target = false
+			velocity = Vector2.ZERO
+	
+	# Auto-attack nearest enemy
+	if nearby_enemies.size() > 0:
+		# Clean up dead enemies
+		nearby_enemies = nearby_enemies.filter(func(e): return is_instance_valid(e))
+		
+		if nearby_enemies.size() > 0:
+			var nearest = nearby_enemies[0]
+			attack(nearest)
+
+func set_move_target(target: Vector2):
+	move_target = target
+	has_move_target = true
+
+func _on_detection_area_body_entered(body):
+	if body is EnemyCharacter:
+		nearby_enemies.append(body)
+
+func _on_detection_area_body_exited(body):
+	if body is EnemyCharacter:
+		nearby_enemies.erase(body)
+
+func _on_died():
+	# Player died - game over
+	get_tree().call_deferred("reload_current_scene")
+
+# res://scripts/entities/enemy_character.gd
+class_name EnemyCharacter
+extends EntityNode
+
+var target: EntityNode = null
+var path: Array[Vector2] = []
+var path_index: int = 0
+var last_pathfind_time: float = 0.0
+var pathfind_interval: float = 0.5
+
+func _ready():
+	super._ready()
+	
+	# Create basic enemy
+	var enemy_stats = Stats.new(30.0, 5.0, 80.0)
+	entity_data = Entity.new("Basic Enemy", enemy_stats)
+	
+	# Give enemy a basic attack weapon
+	var claw = Weapon.new("Claws", GameEnums.ItemType.WEAPON_HANDHELD, GameEnums.ElementType.NONE)
+	claw.damage = 5.0
+	claw.attack_range = 35.0
+	claw.attack_speed = 1.0
+	
+	var simple_blueprint = Blueprint.new("Enemy", GameEnums.EntityType.CHARACTER)
+	simple_blueprint.add_slot(BlueprintSlot.new("Weapon", GameEnums.ItemType.WEAPON_HANDHELD))
+	entity_data.blueprint = simple_blueprint
+	entity_data.inventory.add_item(claw)
+	entity_data.equip_item(claw, simple_blueprint.slots[0])
+	
+	entity_data.health_changed.connect(_on_health_changed)
+	entity_data.died.connect(_on_died)
+	_update_health_bar()
+
+func _physics_process(delta):
+	if not target or not is_instance_valid(target):
+		return
+	
+	var distance_to_target = global_position.distance_to(target.global_position)
+	
+	# Try to attack if in range
+	var weapons = entity_data.get_equipped_weapons()
+	if weapons.size() > 0 and distance_to_target <= weapons[0].attack_range:
+		attack(target)
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	
+	# Update pathfinding periodically
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - last_pathfind_time > pathfind_interval:
+		path = _simple_pathfind(global_position, target.global_position)
+		path_index = 0
+		last_pathfind_time = current_time
+	
+	# Move along path
+	if path.size() > 0 and path_index < path.size():
+		var next_point = path[path_index]
+		var direction = (next_point - global_position).normalized()
+		var distance = global_position.distance_to(next_point)
+		
+		if distance < 10.0:
+			path_index += 1
+		else:
+			velocity = direction * entity_data.get_speed_with_modifiers()
+			move_and_slide()
+
+func _simple_pathfind(from: Vector2, to: Vector2) -> Array[Vector2]:
+	# Simple direct path for now - can be replaced with A* later
+	return [to]
+
+func set_target(new_target: EntityNode):
+	target = new_target

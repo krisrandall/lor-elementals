@@ -1,0 +1,208 @@
+# res://scripts/core/enums.gd
+class_name GameEnums
+extends RefCounted
+
+enum ElementType {
+	NONE,
+	FIRE,
+	WATER,
+	EARTH,
+	WIND
+}
+
+enum ItemType {
+	GENERIC,
+	WEAPON_HANDHELD,
+	WEAPON_TURRET,
+	ARMOR,
+	WEARABLE,
+	POWER_CELL,
+	TOWER_BASE
+}
+
+enum EntityType {
+	CHARACTER,
+	TOWER
+}
+
+# res://scripts/core/stats.gd
+class_name Stats
+extends RefCounted
+
+var max_hp: float = 100.0
+var current_hp: float = 100.0
+var damage: float = 10.0
+var speed: float = 100.0  # pixels per second
+
+func _init(hp: float = 100.0, dmg: float = 10.0, spd: float = 100.0):
+	max_hp = hp
+	current_hp = hp
+	damage = dmg
+	speed = spd
+
+func take_damage(amount: float) -> bool:
+	current_hp = max(0, current_hp - amount)
+	return current_hp <= 0  # returns true if dead
+
+func heal(amount: float):
+	current_hp = min(max_hp, current_hp + amount)
+
+func is_alive() -> bool:
+	return current_hp > 0
+
+func get_hp_percent() -> float:
+	return current_hp / max_hp if max_hp > 0 else 0.0
+
+# res://scripts/core/item.gd
+class_name Item
+extends RefCounted
+
+var item_name: String = "Item"
+var item_type: GameEnums.ItemType = GameEnums.ItemType.GENERIC
+var element_type: GameEnums.ElementType = GameEnums.ElementType.NONE
+
+func _init(name: String = "Item", type: GameEnums.ItemType = GameEnums.ItemType.GENERIC, element: GameEnums.ElementType = GameEnums.ElementType.NONE):
+	item_name = name
+	item_type = type
+	element_type = element
+
+# res://scripts/core/weapon.gd
+class_name Weapon
+extends Item
+
+var damage: float = 10.0
+var attack_range: float = 50.0
+var attack_speed: float = 1.0  # attacks per second
+var speed_modifier: float = 0.0  # positive = faster, negative = slower
+
+func _init(name: String = "Weapon", type: GameEnums.ItemType = GameEnums.ItemType.WEAPON_HANDHELD, element: GameEnums.ElementType = GameEnums.ElementType.NONE):
+	super._init(name, type, element)
+	
+static func create_basic_sword() -> Weapon:
+	var sword = Weapon.new("Basic Sword", GameEnums.ItemType.WEAPON_HANDHELD, GameEnums.ElementType.NONE)
+	sword.damage = 15.0
+	sword.attack_range = 40.0
+	sword.attack_speed = 1.5
+	sword.speed_modifier = 0.0
+	return sword
+
+# res://scripts/core/armor.gd
+class_name Armor
+extends Item
+
+var defense: float = 5.0
+var speed_modifier: float = 0.0
+
+func _init(name: String = "Armor", element: GameEnums.ElementType = GameEnums.ElementType.NONE):
+	super._init(name, GameEnums.ItemType.ARMOR, element)
+
+# res://scripts/core/inventory.gd
+class_name Inventory
+extends RefCounted
+
+var items: Array[Item] = []
+var max_size: int = 20
+
+func add_item(item: Item) -> bool:
+	if items.size() < max_size:
+		items.append(item)
+		return true
+	return false
+
+func remove_item(item: Item) -> bool:
+	var idx = items.find(item)
+	if idx >= 0:
+		items.remove_at(idx)
+		return true
+	return false
+
+func has_item(item: Item) -> bool:
+	return items.has(item)
+
+func get_items_of_type(type: GameEnums.ItemType) -> Array[Item]:
+	var result: Array[Item] = []
+	for item in items:
+		if item.item_type == type:
+			result.append(item)
+	return result
+
+# res://scripts/core/blueprint_slot.gd
+class_name BlueprintSlot
+extends RefCounted
+
+var slot_name: String = "Slot"
+var required_item_type: GameEnums.ItemType = GameEnums.ItemType.GENERIC
+var required_element: GameEnums.ElementType = GameEnums.ElementType.NONE  # NONE means any element
+var equipped_item: Item = null
+
+func _init(name: String, item_type: GameEnums.ItemType, element: GameEnums.ElementType = GameEnums.ElementType.NONE):
+	slot_name = name
+	required_item_type = item_type
+	required_element = element
+
+func can_equip(item: Item) -> bool:
+	if item.item_type != required_item_type:
+		return false
+	if required_element != GameEnums.ElementType.NONE and item.element_type != required_element:
+		return false
+	return true
+
+func equip(item: Item) -> bool:
+	if can_equip(item):
+		equipped_item = item
+		return true
+	return false
+
+func unequip() -> Item:
+	var item = equipped_item
+	equipped_item = null
+	return item
+
+func is_filled() -> bool:
+	return equipped_item != null
+
+# res://scripts/core/blueprint.gd
+class_name Blueprint
+extends RefCounted
+
+var blueprint_name: String = "Blueprint"
+var entity_type: GameEnums.EntityType = GameEnums.EntityType.CHARACTER
+var slots: Array[BlueprintSlot] = []
+
+func _init(name: String, type: GameEnums.EntityType):
+	blueprint_name = name
+	entity_type = type
+
+func add_slot(slot: BlueprintSlot):
+	slots.append(slot)
+
+func get_slots_of_type(item_type: GameEnums.ItemType) -> Array[BlueprintSlot]:
+	var result: Array[BlueprintSlot] = []
+	for slot in slots:
+		if slot.required_item_type == item_type:
+			result.append(slot)
+	return result
+
+func is_complete() -> bool:
+	for slot in slots:
+		if not slot.is_filled():
+			return false
+	return true
+
+static func create_basic_character() -> Blueprint:
+	var bp = Blueprint.new("Basic Character", GameEnums.EntityType.CHARACTER)
+	bp.add_slot(BlueprintSlot.new("Primary Weapon", GameEnums.ItemType.WEAPON_HANDHELD))
+	bp.add_slot(BlueprintSlot.new("Secondary Weapon", GameEnums.ItemType.WEAPON_HANDHELD))
+	bp.add_slot(BlueprintSlot.new("Head Armor", GameEnums.ItemType.ARMOR))
+	bp.add_slot(BlueprintSlot.new("Body Armor", GameEnums.ItemType.ARMOR))
+	bp.add_slot(BlueprintSlot.new("Leg Armor", GameEnums.ItemType.ARMOR))
+	for i in range(6):
+		bp.add_slot(BlueprintSlot.new("Accessory %d" % (i + 1), GameEnums.ItemType.WEARABLE))
+	return bp
+
+static func create_basic_turret() -> Blueprint:
+	var bp = Blueprint.new("Basic Turret", GameEnums.EntityType.TOWER)
+	bp.add_slot(BlueprintSlot.new("Turret Gun", GameEnums.ItemType.WEAPON_TURRET))
+	bp.add_slot(BlueprintSlot.new("Power Cell", GameEnums.ItemType.POWER_CELL))
+	bp.add_slot(BlueprintSlot.new("Tower Base", GameEnums.ItemType.TOWER_BASE))
+	return bp
