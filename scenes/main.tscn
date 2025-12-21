@@ -1,15 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://d400w0pd0r7qr"]
+[gd_scene load_steps=5 format=3 uid="uid://ci3e4srf8w0ae"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_isq2n"]
-[ext_resource type="PackedScene" path="res://scenes/home_castle.tscn" id="2_6oxmi"]
-[ext_resource type="PackedScene" path="res://scenes/player_character.tscn" id="3_gmlb4"]
-[ext_resource type="PackedScene" path="res://scenes/spawn_point.tscn" id="4_n8rki"]
+[ext_resource type="PackedScene" uid="uid://d0h2w8y7egp3b" path="res://scenes/home_castle.tscn" id="2_6oxmi"]
+[ext_resource type="PackedScene" uid="uid://c062wkt4qtxkm" path="res://scenes/player_character.tscn" id="3_gmlb4"]
+[ext_resource type="PackedScene" uid="uid://mgx0dgkcy8wn" path="res://scenes/spawn_point.tscn" id="4_n8rki"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_isq2n")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 
 [node name="HomeCastle" parent="." instance=ExtResource("2_6oxmi")]
 position = Vector2(500, 300)

@@ -1,7 +1,7 @@
 class_name EntityNode
 extends CharacterBody2D
 
-@export var entity_data: Entity
+var entity_data: Entity
 @onready var sprite: ColorRect = $Sprite
 @onready var health_bar: ProgressBar = $HealthBar
 
