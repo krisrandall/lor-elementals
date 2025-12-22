@@ -11,10 +11,9 @@ script = ExtResource("1_isq2n")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="HomeCastle" parent="." instance=ExtResource("2_6oxmi")]
-position = Vector2(500, 300)
+position = Vector2(-100, -100)
 
 [node name="Player" parent="." instance=ExtResource("3_gmlb4")]
-position = Vector2(100, 300)
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_n8rki")]
-position = Vector2(900, 300)
+position = Vector2(300, 160)
