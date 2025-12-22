@@ -17,7 +17,8 @@ func _ready():
 	# Give enemy a basic attack weapon
 	var claw = Weapon.new("Claws", GameEnums.ItemType.WEAPON_HANDHELD, GameEnums.ElementType.NONE)
 	claw.damage = 5.0
-	claw.attack_range = 35.0
+	# NB: range must be greater than the size of the home castle distance from its center to its walls 
+	claw.attack_range = 60.0
 	claw.attack_speed = 1.0
 	
 	var simple_blueprint = Blueprint.new("Enemy", GameEnums.EntityType.CHARACTER)
