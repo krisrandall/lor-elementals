@@ -13,10 +13,12 @@ func _ready():
 			child.set_home_castle(home_castle)
 
 func _input(event):
-	# Handle touch/click movement
+	# Handle touch/click movement using world coordinates (viewport canvas transform accounts for camera)
+	var to_world := get_viewport().get_canvas_transform().affine_inverse()
+	
 	if event is InputEventScreenTouch:
 		if event.pressed:
-			player.set_move_target(event.position)
+			player.set_move_target(to_world * event.position)
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			player.set_move_target(get_viewport().get_mouse_position())
+			player.set_move_target(to_world * event.position)
