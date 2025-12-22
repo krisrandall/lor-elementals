@@ -15,9 +15,43 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=720
+window/size/mode="windowed"
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [dotnet]
 
 project/assembly_name="Legend of Rah - Elementals"
+
+[input]
+
+click={
+"deadzone": 0.5,
+"events": [{
+"alt": false,
+"button_index": 1,
+"control": false,
+"device": -1,
+"double_click": false,
+"factor": 1.0,
+"meta": false,
+"pressed": false,
+"resource_local_to_scene": false,
+"resource_name": "",
+"script": null,
+"shift": false,
+"type": "InputEventMouseButton"
+}]
+}
+
+[layer_names]
+
+2d_physics/layer_1="Player/Castle"
+2d_physics/layer_2="Enemies"
 
 [rendering]
 
