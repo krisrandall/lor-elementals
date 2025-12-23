@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c062wkt4qtxkm"]
+[gd_scene load_steps=6 format=3 uid="uid://c062wkt4qtxkm"]
 
 [ext_resource type="Script" path="res://scripts/entities/player_character.gd" id="1_h7d6i"]
+[ext_resource type="SpriteFrames" uid="uid://bgro8n7ebdumt" path="res://resources/new_sprite_frames.tres" id="2_ao14i"]
+[ext_resource type="Script" path="res://scripts/rendering/animation_controler.gd" id="3_plb5s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3msh"]
 size = Vector2(30, 30)
@@ -9,16 +11,9 @@ size = Vector2(30, 30)
 radius = 150.0
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
-script = ExtResource("1_h7d6i")
 collision_layer = 2
 collision_mask = 2
-
-[node name="Sprite" type="ColorRect" parent="."]
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
-color = Color(0, 0, 1, 1)
+script = ExtResource("1_h7d6i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_j3msh")
@@ -28,7 +23,6 @@ offset_left = -20.0
 offset_top = -30.0
 offset_right = 20.0
 offset_bottom = -25.0
-max_value = 100.0
 value = 100.0
 show_percentage = false
 
@@ -38,6 +32,13 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_3ucsu")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_ao14i")
+animation = &"idle_south"
+
+[node name="AnimationController" type="Node" parent="."]
+script = ExtResource("3_plb5s")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

@@ -5,6 +5,8 @@ var move_target: Vector2 = Vector2.ZERO
 var has_move_target: bool = false
 var nearby_enemies: Array[EntityNode] = []
 
+@onready var animation_controller: AnimationController = $AnimationController
+
 func _ready():
 	super._ready()
 	
@@ -37,6 +39,10 @@ func _physics_process(delta):
 			has_move_target = false
 			velocity = Vector2.ZERO
 	
+	# Update animation based on velocity
+	if animation_controller:
+		animation_controller.update_movement(velocity)
+	
 	# Auto-attack nearest enemy
 	if nearby_enemies.size() > 0:
 		# Clean up dead enemies
@@ -45,6 +51,15 @@ func _physics_process(delta):
 		if nearby_enemies.size() > 0:
 			var nearest = nearby_enemies[0]
 			attack(nearest)
+
+# Override attack to trigger animation
+func attack(target: EntityNode) -> bool:
+	var result = super.attack(target)
+	
+	if result and animation_controller:
+		animation_controller.play_attack()
+	
+	return result
 
 func set_move_target(target: Vector2):
 	move_target = target

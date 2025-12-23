@@ -1,0 +1,557 @@
+[gd_resource type="SpriteFrames" load_steps=128 format=3 uid="uid://bgro8n7ebdumt"]
+
+[ext_resource type="Texture2D" uid="uid://cn08fu36vdmnr" path="res://assets/animations/player/rotations/south.png" id="1_south"]
+[ext_resource type="Texture2D" uid="uid://se001" path="res://assets/animations/player/rotations/south-east.png" id="1_se"]
+[ext_resource type="Texture2D" uid="uid://e001" path="res://assets/animations/player/rotations/east.png" id="1_east"]
+[ext_resource type="Texture2D" uid="uid://ne001" path="res://assets/animations/player/rotations/north-east.png" id="1_ne"]
+[ext_resource type="Texture2D" uid="uid://n001" path="res://assets/animations/player/rotations/north.png" id="1_north"]
+[ext_resource type="Texture2D" uid="uid://nw001" path="res://assets/animations/player/rotations/north-west.png" id="1_nw"]
+[ext_resource type="Texture2D" uid="uid://w001" path="res://assets/animations/player/rotations/west.png" id="1_west"]
+[ext_resource type="Texture2D" uid="uid://sw001" path="res://assets/animations/player/rotations/south-west.png" id="1_sw"]
+
+[ext_resource type="Texture2D" uid="uid://dnmyxjw02rlpj" path="res://assets/animations/player/animations/running-6-frames/south/frame_000.png" id="2_ws0"]
+[ext_resource type="Texture2D" uid="uid://doainrveshkgp" path="res://assets/animations/player/animations/running-6-frames/south/frame_001.png" id="2_ws1"]
+[ext_resource type="Texture2D" uid="uid://cago10j7xk15v" path="res://assets/animations/player/animations/running-6-frames/south/frame_002.png" id="2_ws2"]
+[ext_resource type="Texture2D" uid="uid://xmoypdbl5afn" path="res://assets/animations/player/animations/running-6-frames/south/frame_003.png" id="2_ws3"]
+[ext_resource type="Texture2D" uid="uid://bd4em43kcwa2i" path="res://assets/animations/player/animations/running-6-frames/south/frame_004.png" id="2_ws4"]
+[ext_resource type="Texture2D" uid="uid://6ny7xetuscmv" path="res://assets/animations/player/animations/running-6-frames/south/frame_005.png" id="2_ws5"]
+
+[ext_resource type="Texture2D" uid="uid://wse0" path="res://assets/animations/player/animations/running-6-frames/south-east/frame_000.png" id="3_wse0"]
+[ext_resource type="Texture2D" uid="uid://wse1" path="res://assets/animations/player/animations/running-6-frames/south-east/frame_001.png" id="3_wse1"]
+[ext_resource type="Texture2D" uid="uid://wse2" path="res://assets/animations/player/animations/running-6-frames/south-east/frame_002.png" id="3_wse2"]
+[ext_resource type="Texture2D" uid="uid://wse3" path="res://assets/animations/player/animations/running-6-frames/south-east/frame_003.png" id="3_wse3"]
+[ext_resource type="Texture2D" uid="uid://wse4" path="res://assets/animations/player/animations/running-6-frames/south-east/frame_004.png" id="3_wse4"]
+[ext_resource type="Texture2D" uid="uid://wse5" path="res://assets/animations/player/animations/running-6-frames/south-east/frame_005.png" id="3_wse5"]
+
+[ext_resource type="Texture2D" uid="uid://we0" path="res://assets/animations/player/animations/running-6-frames/east/frame_000.png" id="4_we0"]
+[ext_resource type="Texture2D" uid="uid://we1" path="res://assets/animations/player/animations/running-6-frames/east/frame_001.png" id="4_we1"]
+[ext_resource type="Texture2D" uid="uid://we2" path="res://assets/animations/player/animations/running-6-frames/east/frame_002.png" id="4_we2"]
+[ext_resource type="Texture2D" uid="uid://we3" path="res://assets/animations/player/animations/running-6-frames/east/frame_003.png" id="4_we3"]
+[ext_resource type="Texture2D" uid="uid://we4" path="res://assets/animations/player/animations/running-6-frames/east/frame_004.png" id="4_we4"]
+[ext_resource type="Texture2D" uid="uid://we5" path="res://assets/animations/player/animations/running-6-frames/east/frame_005.png" id="4_we5"]
+
+[ext_resource type="Texture2D" uid="uid://wne0" path="res://assets/animations/player/animations/running-6-frames/north-east/frame_000.png" id="5_wne0"]
+[ext_resource type="Texture2D" uid="uid://wne1" path="res://assets/animations/player/animations/running-6-frames/north-east/frame_001.png" id="5_wne1"]
+[ext_resource type="Texture2D" uid="uid://wne2" path="res://assets/animations/player/animations/running-6-frames/north-east/frame_002.png" id="5_wne2"]
+[ext_resource type="Texture2D" uid="uid://wne3" path="res://assets/animations/player/animations/running-6-frames/north-east/frame_003.png" id="5_wne3"]
+[ext_resource type="Texture2D" uid="uid://wne4" path="res://assets/animations/player/animations/running-6-frames/north-east/frame_004.png" id="5_wne4"]
+[ext_resource type="Texture2D" uid="uid://wne5" path="res://assets/animations/player/animations/running-6-frames/north-east/frame_005.png" id="5_wne5"]
+
+[ext_resource type="Texture2D" uid="uid://wn0" path="res://assets/animations/player/animations/running-6-frames/north/frame_000.png" id="6_wn0"]
+[ext_resource type="Texture2D" uid="uid://wn1" path="res://assets/animations/player/animations/running-6-frames/north/frame_001.png" id="6_wn1"]
+[ext_resource type="Texture2D" uid="uid://wn2" path="res://assets/animations/player/animations/running-6-frames/north/frame_002.png" id="6_wn2"]
+[ext_resource type="Texture2D" uid="uid://wn3" path="res://assets/animations/player/animations/running-6-frames/north/frame_003.png" id="6_wn3"]
+[ext_resource type="Texture2D" uid="uid://wn4" path="res://assets/animations/player/animations/running-6-frames/north/frame_004.png" id="6_wn4"]
+[ext_resource type="Texture2D" uid="uid://wn5" path="res://assets/animations/player/animations/running-6-frames/north/frame_005.png" id="6_wn5"]
+
+[ext_resource type="Texture2D" uid="uid://wnw0" path="res://assets/animations/player/animations/running-6-frames/north-west/frame_000.png" id="7_wnw0"]
+[ext_resource type="Texture2D" uid="uid://wnw1" path="res://assets/animations/player/animations/running-6-frames/north-west/frame_001.png" id="7_wnw1"]
+[ext_resource type="Texture2D" uid="uid://wnw2" path="res://assets/animations/player/animations/running-6-frames/north-west/frame_002.png" id="7_wnw2"]
+[ext_resource type="Texture2D" uid="uid://wnw3" path="res://assets/animations/player/animations/running-6-frames/north-west/frame_003.png" id="7_wnw3"]
+[ext_resource type="Texture2D" uid="uid://wnw4" path="res://assets/animations/player/animations/running-6-frames/north-west/frame_004.png" id="7_wnw4"]
+[ext_resource type="Texture2D" uid="uid://wnw5" path="res://assets/animations/player/animations/running-6-frames/north-west/frame_005.png" id="7_wnw5"]
+
+[ext_resource type="Texture2D" uid="uid://ww0" path="res://assets/animations/player/animations/running-6-frames/west/frame_000.png" id="8_ww0"]
+[ext_resource type="Texture2D" uid="uid://ww1" path="res://assets/animations/player/animations/running-6-frames/west/frame_001.png" id="8_ww1"]
+[ext_resource type="Texture2D" uid="uid://ww2" path="res://assets/animations/player/animations/running-6-frames/west/frame_002.png" id="8_ww2"]
+[ext_resource type="Texture2D" uid="uid://ww3" path="res://assets/animations/player/animations/running-6-frames/west/frame_003.png" id="8_ww3"]
+[ext_resource type="Texture2D" uid="uid://ww4" path="res://assets/animations/player/animations/running-6-frames/west/frame_004.png" id="8_ww4"]
+[ext_resource type="Texture2D" uid="uid://ww5" path="res://assets/animations/player/animations/running-6-frames/west/frame_005.png" id="8_ww5"]
+
+[ext_resource type="Texture2D" uid="uid://wsw0" path="res://assets/animations/player/animations/running-6-frames/south-west/frame_000.png" id="9_wsw0"]
+[ext_resource type="Texture2D" uid="uid://wsw1" path="res://assets/animations/player/animations/running-6-frames/south-west/frame_001.png" id="9_wsw1"]
+[ext_resource type="Texture2D" uid="uid://wsw2" path="res://assets/animations/player/animations/running-6-frames/south-west/frame_002.png" id="9_wsw2"]
+[ext_resource type="Texture2D" uid="uid://wsw3" path="res://assets/animations/player/animations/running-6-frames/south-west/frame_003.png" id="9_wsw3"]
+[ext_resource type="Texture2D" uid="uid://wsw4" path="res://assets/animations/player/animations/running-6-frames/south-west/frame_004.png" id="9_wsw4"]
+[ext_resource type="Texture2D" uid="uid://wsw5" path="res://assets/animations/player/animations/running-6-frames/south-west/frame_005.png" id="9_wsw5"]
+
+[ext_resource type="Texture2D" uid="uid://as0" path="res://assets/animations/player/animations/cross-punch/south/frame_000.png" id="10_as0"]
+[ext_resource type="Texture2D" uid="uid://as1" path="res://assets/animations/player/animations/cross-punch/south/frame_001.png" id="10_as1"]
+[ext_resource type="Texture2D" uid="uid://as2" path="res://assets/animations/player/animations/cross-punch/south/frame_002.png" id="10_as2"]
+[ext_resource type="Texture2D" uid="uid://as3" path="res://assets/animations/player/animations/cross-punch/south/frame_003.png" id="10_as3"]
+[ext_resource type="Texture2D" uid="uid://as4" path="res://assets/animations/player/animations/cross-punch/south/frame_004.png" id="10_as4"]
+[ext_resource type="Texture2D" uid="uid://as5" path="res://assets/animations/player/animations/cross-punch/south/frame_005.png" id="10_as5"]
+
+[ext_resource type="Texture2D" uid="uid://ase0" path="res://assets/animations/player/animations/cross-punch/south-east/frame_000.png" id="11_ase0"]
+[ext_resource type="Texture2D" uid="uid://ase1" path="res://assets/animations/player/animations/cross-punch/south-east/frame_001.png" id="11_ase1"]
+[ext_resource type="Texture2D" uid="uid://ase2" path="res://assets/animations/player/animations/cross-punch/south-east/frame_002.png" id="11_ase2"]
+[ext_resource type="Texture2D" uid="uid://ase3" path="res://assets/animations/player/animations/cross-punch/south-east/frame_003.png" id="11_ase3"]
+[ext_resource type="Texture2D" uid="uid://ase4" path="res://assets/animations/player/animations/cross-punch/south-east/frame_004.png" id="11_ase4"]
+[ext_resource type="Texture2D" uid="uid://ase5" path="res://assets/animations/player/animations/cross-punch/south-east/frame_005.png" id="11_ase5"]
+
+[ext_resource type="Texture2D" uid="uid://ae0" path="res://assets/animations/player/animations/cross-punch/east/frame_000.png" id="12_ae0"]
+[ext_resource type="Texture2D" uid="uid://ae1" path="res://assets/animations/player/animations/cross-punch/east/frame_001.png" id="12_ae1"]
+[ext_resource type="Texture2D" uid="uid://ae2" path="res://assets/animations/player/animations/cross-punch/east/frame_002.png" id="12_ae2"]
+[ext_resource type="Texture2D" uid="uid://ae3" path="res://assets/animations/player/animations/cross-punch/east/frame_003.png" id="12_ae3"]
+[ext_resource type="Texture2D" uid="uid://ae4" path="res://assets/animations/player/animations/cross-punch/east/frame_004.png" id="12_ae4"]
+[ext_resource type="Texture2D" uid="uid://ae5" path="res://assets/animations/player/animations/cross-punch/east/frame_005.png" id="12_ae5"]
+
+[ext_resource type="Texture2D" uid="uid://ane0" path="res://assets/animations/player/animations/cross-punch/north-east/frame_000.png" id="13_ane0"]
+[ext_resource type="Texture2D" uid="uid://ane1" path="res://assets/animations/player/animations/cross-punch/north-east/frame_001.png" id="13_ane1"]
+[ext_resource type="Texture2D" uid="uid://ane2" path="res://assets/animations/player/animations/cross-punch/north-east/frame_002.png" id="13_ane2"]
+[ext_resource type="Texture2D" uid="uid://ane3" path="res://assets/animations/player/animations/cross-punch/north-east/frame_003.png" id="13_ane3"]
+[ext_resource type="Texture2D" uid="uid://ane4" path="res://assets/animations/player/animations/cross-punch/north-east/frame_004.png" id="13_ane4"]
+[ext_resource type="Texture2D" uid="uid://ane5" path="res://assets/animations/player/animations/cross-punch/north-east/frame_005.png" id="13_ane5"]
+
+[ext_resource type="Texture2D" uid="uid://an0" path="res://assets/animations/player/animations/cross-punch/north/frame_000.png" id="14_an0"]
+[ext_resource type="Texture2D" uid="uid://an1" path="res://assets/animations/player/animations/cross-punch/north/frame_001.png" id="14_an1"]
+[ext_resource type="Texture2D" uid="uid://an2" path="res://assets/animations/player/animations/cross-punch/north/frame_002.png" id="14_an2"]
+[ext_resource type="Texture2D" uid="uid://an3" path="res://assets/animations/player/animations/cross-punch/north/frame_003.png" id="14_an3"]
+[ext_resource type="Texture2D" uid="uid://an4" path="res://assets/animations/player/animations/cross-punch/north/frame_004.png" id="14_an4"]
+[ext_resource type="Texture2D" uid="uid://an5" path="res://assets/animations/player/animations/cross-punch/north/frame_005.png" id="14_an5"]
+
+[ext_resource type="Texture2D" uid="uid://anw0" path="res://assets/animations/player/animations/cross-punch/north-west/frame_000.png" id="15_anw0"]
+[ext_resource type="Texture2D" uid="uid://anw1" path="res://assets/animations/player/animations/cross-punch/north-west/frame_001.png" id="15_anw1"]
+[ext_resource type="Texture2D" uid="uid://anw2" path="res://assets/animations/player/animations/cross-punch/north-west/frame_002.png" id="15_anw2"]
+[ext_resource type="Texture2D" uid="uid://anw3" path="res://assets/animations/player/animations/cross-punch/north-west/frame_003.png" id="15_anw3"]
+[ext_resource type="Texture2D" uid="uid://anw4" path="res://assets/animations/player/animations/cross-punch/north-west/frame_004.png" id="15_anw4"]
+[ext_resource type="Texture2D" uid="uid://anw5" path="res://assets/animations/player/animations/cross-punch/north-west/frame_005.png" id="15_anw5"]
+
+[ext_resource type="Texture2D" uid="uid://aw0" path="res://assets/animations/player/animations/cross-punch/west/frame_000.png" id="16_aw0"]
+[ext_resource type="Texture2D" uid="uid://aw1" path="res://assets/animations/player/animations/cross-punch/west/frame_001.png" id="16_aw1"]
+[ext_resource type="Texture2D" uid="uid://aw2" path="res://assets/animations/player/animations/cross-punch/west/frame_002.png" id="16_aw2"]
+[ext_resource type="Texture2D" uid="uid://aw3" path="res://assets/animations/player/animations/cross-punch/west/frame_003.png" id="16_aw3"]
+[ext_resource type="Texture2D" uid="uid://aw4" path="res://assets/animations/player/animations/cross-punch/west/frame_004.png" id="16_aw4"]
+[ext_resource type="Texture2D" uid="uid://aw5" path="res://assets/animations/player/animations/cross-punch/west/frame_005.png" id="16_aw5"]
+
+[ext_resource type="Texture2D" uid="uid://asw0" path="res://assets/animations/player/animations/cross-punch/south-west/frame_000.png" id="17_asw0"]
+[ext_resource type="Texture2D" uid="uid://asw1" path="res://assets/animations/player/animations/cross-punch/south-west/frame_001.png" id="17_asw1"]
+[ext_resource type="Texture2D" uid="uid://asw2" path="res://assets/animations/player/animations/cross-punch/south-west/frame_002.png" id="17_asw2"]
+[ext_resource type="Texture2D" uid="uid://asw3" path="res://assets/animations/player/animations/cross-punch/south-west/frame_003.png" id="17_asw3"]
+[ext_resource type="Texture2D" uid="uid://asw4" path="res://assets/animations/player/animations/cross-punch/south-west/frame_004.png" id="17_asw4"]
+[ext_resource type="Texture2D" uid="uid://asw5" path="res://assets/animations/player/animations/cross-punch/south-west/frame_005.png" id="17_asw5"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_south")
+}],
+"loop": true,
+"name": &"idle_south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_se")
+}],
+"loop": true,
+"name": &"idle_south-east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_east")
+}],
+"loop": true,
+"name": &"idle_east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ne")
+}],
+"loop": true,
+"name": &"idle_north-east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_north")
+}],
+"loop": true,
+"name": &"idle_north",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nw")
+}],
+"loop": true,
+"name": &"idle_north-west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_west")
+}],
+"loop": true,
+"name": &"idle_west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sw")
+}],
+"loop": true,
+"name": &"idle_south-west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ws0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ws1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ws2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ws3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ws4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ws5")
+}],
+"loop": true,
+"name": &"walk_south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wse0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wse1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wse2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wse3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wse4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wse5")
+}],
+"loop": true,
+"name": &"walk_south-east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_we0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_we1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_we2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_we3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_we4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_we5")
+}],
+"loop": true,
+"name": &"walk_east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_wne0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wne1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wne2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wne3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wne4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wne5")
+}],
+"loop": true,
+"name": &"walk_north-east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_wn0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wn3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wn4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wn5")
+}],
+"loop": true,
+"name": &"walk_north",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wnw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wnw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wnw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wnw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wnw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wnw5")
+}],
+"loop": true,
+"name": &"walk_north-west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ww0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ww1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ww2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ww3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ww4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ww5")
+}],
+"loop": true,
+"name": &"walk_west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_wsw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wsw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wsw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wsw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wsw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wsw5")
+}],
+"loop": true,
+"name": &"walk_south-west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_as0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_as1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_as2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_as3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_as4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_as5")
+}],
+"loop": false,
+"name": &"attack_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ase0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ase1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ase2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ase3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ase4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ase5")
+}],
+"loop": false,
+"name": &"attack_south-east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_ae0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ae1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ae2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ae3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ae4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ae5")
+}],
+"loop": false,
+"name": &"attack_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ane0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ane1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ane2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ane3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ane4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ane5")
+}],
+"loop": false,
+"name": &"attack_north-east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_an0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_an1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_an2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_an3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_an4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_an5")
+}],
+"loop": false,
+"name": &"attack_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_anw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_anw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_anw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_anw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_anw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_anw5")
+}],
+"loop": false,
+"name": &"attack_north-west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_aw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_aw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_aw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_aw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_aw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_aw5")
+}],
+"loop": false,
+"name": &"attack_west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_asw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_asw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_asw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_asw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_asw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_asw5")
+}],
+"loop": false,
+"name": &"attack_south-west",
+"speed": 10.0
+}]
