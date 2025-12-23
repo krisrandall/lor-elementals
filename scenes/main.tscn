@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci3e4srf8w0ae"]
+[gd_scene load_steps=6 format=3 uid="uid://ci3e4srf8w0ae"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_isq2n"]
 [ext_resource type="PackedScene" uid="uid://d0h2w8y7egp3b" path="res://scenes/home_castle.tscn" id="2_6oxmi"]
+[ext_resource type="Script" path="res://scripts/rendering/camera_controller.gd" id="2_ekxv3"]
 [ext_resource type="PackedScene" uid="uid://c062wkt4qtxkm" path="res://scenes/player_character.tscn" id="3_gmlb4"]
 [ext_resource type="PackedScene" uid="uid://mgx0dgkcy8wn" path="res://scenes/spawn_point.tscn" id="4_n8rki"]
 
@@ -9,6 +10,7 @@
 script = ExtResource("1_isq2n")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_ekxv3")
 
 [node name="HomeCastle" parent="." instance=ExtResource("2_6oxmi")]
 position = Vector2(-100, -100)
